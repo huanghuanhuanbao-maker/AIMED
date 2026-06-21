@@ -2,9 +2,10 @@
 FROM node:22-alpine AS build
 WORKDIR /app
 
-# Install dependencies (leverage layer caching)
+# Install dependencies (leverage layer caching).
+# Use `npm install` since the repo has no committed package-lock.json.
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 
 # Build the static site.
 COPY . .
